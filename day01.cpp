@@ -1,10 +1,11 @@
 #include <algorithm>
 #include <filesystem>
-#include <fstream>
 #include <iostream>
 #include <map>
 #include <numeric>
 #include <ranges>
+
+#include "file.hpp"
 
 using namespace std::literals;
 
@@ -12,16 +13,15 @@ namespace aoc
 {
     void day01_calorie_counting()
     {
-        std::cout << "Day 1:" << std::endl;
+        auto input_stream = file::open("data/day01-calories.txt");
+        if (!input_stream.has_value())
+            return;
 
-        std::filesystem::path input_path{ "../day01-calories.txt" };
-        std::ifstream input_stream{ input_path };
-        if (!input_stream.is_open())
-            std::cout << "File not found: " << input_path.c_str() << std::endl;
+        std::cout << "Day 1:" << std::endl;
 
         std::map<std::uint32_t, std::uint64_t> elf_calories{};
         std::uint32_t elf_id{ 0 };
-        for (std::string line; std::getline(input_stream, line);)
+        for (std::string line; std::getline(*input_stream, line);)
         {
             if (line.empty())
                 ++elf_id;
