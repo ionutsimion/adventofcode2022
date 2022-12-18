@@ -6,7 +6,7 @@ namespace aoc
 
 int main()
 {
-    aoc::day01_calorie_counting();
+    //aoc::day01_calorie_counting();
     aoc::day02_rock_paper_scissors_strategy();
 
     return 0;
