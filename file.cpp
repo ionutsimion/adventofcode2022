@@ -9,7 +9,7 @@ std::optional<std::ifstream> file::open(std::string &&file_path)
     std::ifstream input_stream{ input_path };
     if (!input_stream.is_open())
     {
-        std::cout << "File not found: " << input_path.c_str() << std::endl;
+        std::cout << "File not found: " << input_path << std::endl;
         return {};
     }
 

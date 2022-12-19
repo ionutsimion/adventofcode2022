@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <string>
 
 #include "file.hpp"
 
@@ -26,7 +27,7 @@ namespace
         [[nodiscard]] size_t outcome_score(char column1, char column2) const override;
 
     private:
-        std::map<char, size_t> const shape_points{ { 'X', 1uz }, { 'Y', 2uz }, { 'Z', 3uz } };
+        std::map<char, size_t> const shape_points{ { 'X', 1u }, { 'Y', 2u }, { 'Z', 3u } };
     };
 
     class second_column_is_outcome
@@ -40,19 +41,8 @@ namespace
         [[nodiscard]] size_t outcome_score(char column1, char column2) const override;
 
     private:
-        std::map<char, size_t> const shape_points{ { 'A', 1uz }, { 'B', 2uz }, { 'C', 3uz } };
+        std::map<char, size_t> const shape_points{ { 'A', 1u }, { 'B', 2u }, { 'C', 3u } };
     };
-
-    auto evaluate_my_score(char const opponent_shape, char const my_shape)
-    {
-        switch (opponent_shape)
-        {
-        case 'A': return (my_shape == 'X') * 3uz + (my_shape == 'Y') * 6uz;
-        case 'B': return (my_shape == 'Y') * 3uz + (my_shape == 'Z') * 6uz;
-        case 'C': return (my_shape == 'Z') * 3uz + (my_shape == 'X') * 6uz;
-        default: return 0uz;
-        }
-    }
 }
 
 namespace aoc
@@ -65,13 +55,6 @@ namespace aoc
 
         std::cout << "Day 2:" << std::endl;
 
-        std::map<char, size_t> const shape_points{
-            { 'X', 1uz }
-          , { 'Y', 2uz }
-          , { 'Z', 3uz }
-        };
-
-        size_t score{};
         second_column_is_shape second_column_is_shape_strategy{};
         second_column_is_outcome second_column_is_outcome_strategy{};
         size_t score_for_strategy_1{};
@@ -82,7 +65,6 @@ namespace aoc
             {
                 auto const first_column = line.at(0);
                 auto const second_column = line.at(2);
-                score += shape_points.at(second_column) + evaluate_my_score(first_column, second_column);
                 score_for_strategy_1 += second_column_is_shape_strategy.round_score(first_column, second_column);
                 score_for_strategy_2 += second_column_is_outcome_strategy.round_score(first_column, second_column);
             }
@@ -92,9 +74,8 @@ namespace aoc
             std::cerr << "Exception caught: " << e.what() << std::endl;
         }
 
-        std::cout << "\tPart 1) I will have " << score << " points" << std::endl;
-        std::cout << "\tscore 1: " << score_for_strategy_1 << std::endl;
-        std::cout << "\tscore 2: " << score_for_strategy_2 << std::endl;
+        std::cout << "\tPart 1) I think I would have " << score_for_strategy_1 << " points" << std::endl;
+        std::cout << "\tPart 2) I will actually have " << score_for_strategy_2<< " points" << std::endl;
     }
 }
 
@@ -112,7 +93,13 @@ namespace
 
     size_t second_column_is_shape::outcome_score(char const column1, char const column2) const
     {
-        return 0uz;
+        switch (column1)
+        {
+        case 'A': return (column2 == 'X') * 3u + (column2 == 'Y') * 6u;
+        case 'B': return (column2 == 'Y') * 3u + (column2 == 'Z') * 6u;
+        case 'C': return (column2 == 'Z') * 3u + (column2 == 'X') * 6u;
+        default: return 0u;
+        }
     }
 
     size_t second_column_is_outcome::round_score(char const column1, char const column2) const
@@ -127,6 +114,6 @@ namespace
 
     size_t second_column_is_outcome::outcome_score(char const column1, char const column2) const
     {
-        return 0uz;
+        return 0u;
     }
 }

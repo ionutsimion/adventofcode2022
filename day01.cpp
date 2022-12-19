@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 #include <filesystem>
 #include <iostream>
 #include <map>
@@ -29,10 +30,10 @@ namespace aoc
                 elf_calories[elf_id] += std::stoull(line);
         }
 
-        std::array<std::uint64_t, 3uz> top_three{};
+        std::array<std::uint64_t, 3u> top_three{};
         for (auto const &[id, calories] : elf_calories)
         {
-            auto *min = std::min_element(top_three.begin(), top_three.end());
+            auto min = std::min_element(top_three.begin(), top_three.end());
             *min = std::max(*min, calories);
         }
 
