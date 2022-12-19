@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <numeric>
 #include <string>
 
 #include "file.hpp"
@@ -42,6 +43,8 @@ namespace
 
     private:
         std::map<char, size_t> const shape_points{ { 'A', 1u }, { 'B', 2u }, { 'C', 3u } };
+        std::map<char, char> const shape_trumped_by{ { 'A', 'B' }, { 'B', 'C' }, { 'C', 'A' } };
+        std::map<char, char> const shape_trumps{ { 'A', 'C' }, { 'B', 'A' }, { 'C', 'B' } };
     };
 }
 
@@ -104,7 +107,15 @@ namespace
 
     size_t second_column_is_outcome::round_score(char const column1, char const column2) const
     {
-        return shape_score(column1) + outcome_score(column1, column2);
+        char my_shape;
+        switch (column2)
+        {
+        case 'X': my_shape = shape_trumps.at(column1); break;
+        case 'Y': my_shape = column1; break;
+        case 'Z': my_shape = shape_trumped_by.at(column1); break;
+        default: my_shape = '\0'; break;
+        }
+        return shape_score(my_shape) + outcome_score(column1, my_shape);
     }
 
     size_t second_column_is_outcome::shape_score(char const shape_code) const
@@ -114,6 +125,6 @@ namespace
 
     size_t second_column_is_outcome::outcome_score(char const column1, char const column2) const
     {
-        return 0u;
+        return (shape_trumped_by.at(column1) == column2) * 6u + (column1 == column2) * 3u;
     }
 }
