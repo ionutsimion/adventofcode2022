@@ -45,7 +45,7 @@ namespace aoc
         }
 
         std::cout << "\tPart 1) The sum of misplaced item priorities is: " << sum_of_priorities << std::endl;
-        std::cout << "\tPart 1) The sum of elf group badge priorities is: " << sum_of_badge_priorities << std::endl;
+        std::cout << "\tPart 2) The sum of elf group badge priorities is: " << sum_of_badge_priorities << std::endl;
     }
 }
 
