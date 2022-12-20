@@ -2,11 +2,12 @@
 
 namespace aoc
 {
-    [[maybe_unused]] extern void day01_calorie_counting();
-    [[maybe_unused]] extern void day02_rock_paper_scissors_strategy();
-    [[maybe_unused]] extern void day03_rucksack_organization();
-    [[maybe_unused]] extern void day04_camp_cleanup();
-    [[maybe_unused]] extern void day05_supply_stacks();
+    extern void day01_calorie_counting();
+    extern void day02_rock_paper_scissors_strategy();
+    extern void day03_rucksack_organization();
+    extern void day04_camp_cleanup();
+    extern void day05_supply_stacks();
+    extern void day06_tuning_trouble();
 }
 
 int main(int const number_of_arguments, char *arguments[])
@@ -17,6 +18,7 @@ int main(int const number_of_arguments, char *arguments[])
       , aoc::day03_rucksack_organization
       , aoc::day04_camp_cleanup
       , aoc::day05_supply_stacks
+      , aoc::day06_tuning_trouble
     };
 
     if (auto const run_last_challenge_only = number_of_arguments > 1 && strcmp(arguments[1], "last_only") == 0; run_last_challenge_only)
