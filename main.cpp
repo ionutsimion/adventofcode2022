@@ -8,6 +8,7 @@ namespace aoc
     extern void day04_camp_cleanup();
     extern void day05_supply_stacks();
     extern void day06_tuning_trouble();
+    extern void day07_no_space_left_on_device();
 }
 
 int main(int const number_of_arguments, char *arguments[])
@@ -19,6 +20,7 @@ int main(int const number_of_arguments, char *arguments[])
       , aoc::day04_camp_cleanup
       , aoc::day05_supply_stacks
       , aoc::day06_tuning_trouble
+      , aoc::day07_no_space_left_on_device
     };
 
     if (auto const run_last_challenge_only = number_of_arguments > 1 && strcmp(arguments[1], "last_only") == 0; run_last_challenge_only)
