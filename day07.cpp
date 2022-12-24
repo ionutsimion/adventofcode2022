@@ -1,8 +1,9 @@
 #include <iostream>
+#include <memory>
+#include <numeric>
 #include <string>
 #include <vector>
 #include <sstream>
-#include <numeric>
 
 #include "file.hpp"
 
@@ -47,7 +48,7 @@ namespace
             if (type_ == item_type::file)
                 return size_;
 
-            return std::reduce(children_.cbegin(), children_.cend(), 0ull,
+            return std::accumulate(children_.cbegin(), children_.cend(), 0ull,
                                [](size_t const sum, std::shared_ptr<item> const &child){ return sum + child->size(); });
         }
 
